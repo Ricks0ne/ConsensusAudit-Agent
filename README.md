@@ -10,6 +10,16 @@ Live Demo: `https://consensusaudit.vercel.app/`
 
 ---
 
+## ⚠️ Note on the Live Vercel Demo
+
+The live version of this application is hosted on Vercel's free Hobby tier, which strictly caps serverless API execution time at 60 seconds. 
+
+Because GenLayer's decentralized AI consensus requires multiple validator nodes to independently analyze the code and vote on a verdict, full on-chain repository audits typically take between 1 to 4 minutes to finalize. As a result, repository audits on the live URL will likely time out and trigger the off-chain fallback engine.
+
+**To experience the full, unconstrained GenLayer on-chain consensus, please follow the Quickstart instructions below to run the project locally.**
+
+---
+
 ## The Problem
 
 Agent-to-agent commerce keeps hitting the same wall: money is owed for a deliverable, and the two parties can't agree whether the deliverable is acceptable.
@@ -35,6 +45,7 @@ flowchart LR
     G -->|No| I[Transaction Reverts]
     E --> J[file_appeal with Rebuttal<br/>Max 2 Rounds]
     J --> C
+
 
 ```
 
@@ -97,6 +108,7 @@ cd ConsensusAudit-Agent
 npm install
 # create .env.local with the variables below
 npm run dev
+
 ```
 
 ### Environment Variables
@@ -109,6 +121,7 @@ npm run dev
 | `GITHUB_TOKEN` | no | Raises the GitHub API rate limit for large repository scanning. |
 
 ## Reproducing the Demo
+
 1. Choose **Raw code**. The textarea is pre-filled with `VulnerableVault`.
 2. Click **Run audit**. You should see REJECTED with a Critical reentrancy finding and a tx link. Model output can vary.
 3. Look up the submission ID with `get_verdict` in the explorer to confirm the stored verdict.
@@ -118,8 +131,8 @@ Escrow (open/release/claim/refund) is implemented in the contract and gated on A
 ## Layout
 
 ```text
-contracts/audit_registry.py   intelligent contract: adjudication, verdicts, payable escrow, admin
-lib/verdict.ts                universal normalizer: enforces the "criticals mean REJECTED" invariant
+contracts/audit_registry.py  intelligent contract: adjudication, verdicts, payable escrow, admin
+lib/verdict.ts               universal normalizer: enforces the "criticals mean REJECTED" invariant
 lib/genlayer.ts               server-only client, stable network config, id generation, wei conversion
 lib/contract-public.ts        safe shared constants (address, explorer URLs) for client and server
 app/api/audit/route.ts        ingest, GitHub parsing, on-chain submit, off-chain Groq fallback, attestation

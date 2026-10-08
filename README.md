@@ -2,9 +2,9 @@
 
 **An intelligent, fault-tolerant deployment gatekeeper that only opens escrow when independent validators agree the code is safe, backed by an automated 3-tier consensus architecture.**
 
-Track: **Onchain Justice** · Network: **GenLayer Studio (Chain `61999`)**
+Track: **Onchain Justice** · Network: **GenLayer Studio Dev (Chain `61997`)**
 
-Contract: [`0x20224e2cA21e8cdDFFFB059658da2b8CC4507781`](https://explorer-studio-dev.genlayer.com/address/0x20224e2cA21e8cdDFFFB059658da2b8CC4507781?utm_source=gemini)
+Contract: [`0xC00e25A34Ce346fDb4E3F3582e637154D9f85588`](https://explorer-studio-dev.genlayer.com/address/0xC00e25A34Ce346fDb4E3F3582e637154D9f85588)
 
 Live Demo: `https://consensusaudit.vercel.app/`
 

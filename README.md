@@ -4,7 +4,7 @@
 
 Track: **Onchain Justice** · Network: **GenLayer Studio Dev (Chain `61997`)**
 
-Contract: [`0xC00e25A34Ce346fDb4E3F3582e637154D9f85588`](https://explorer-studio-dev.genlayer.com/address/0xC00e25A34Ce346fDb4E3F3582e637154D9f85588)
+Contract: [`0x4E50b22a93F1359eb663170fC334810487f7eEC7`](https://explorer-studio-dev.genlayer.com/address/0x4E50b22a93F1359eb663170fC334810487f7eEC7)
 
 Live Demo: `https://consensusaudit.vercel.app/`
 
@@ -92,7 +92,7 @@ The UI features live node simulation states and allows users to export a finaliz
 ## Quickstart
 
 ```bash
-git clone https://github.com/uchecharles/ConsensusAudit-Agent
+git clone https://github.com/Ricks0ne/ConsensusAudit-Agent
 cd ConsensusAudit-Agent
 npm install
 # create .env.local with the variables below

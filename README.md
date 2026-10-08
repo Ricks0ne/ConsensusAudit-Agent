@@ -1,6 +1,6 @@
 # ConsensusAudit
 
-**An intelligent, fault-tolerant deployment gatekeeper that only opens escrow when independent validators agree the code is safe, backed by an automated 3-tier consensus architecture.**
+**A deployment gatekeeper: GenLayer validators independently audit contract code and reach consensus on APPROVED/REJECTED. A verdict reached on-chain can gate GEN escrow in the contract. If on-chain consensus fails, the app falls back to a clearly labeled off-chain check (Groq multi-model, then static heuristics) that never moves real funds.**
 
 Track: **Onchain Justice** · Network: **GenLayer Studio Dev (Chain `61997`)**
 
@@ -93,11 +93,10 @@ The UI features live node simulation states and allows users to export a finaliz
 
 ```bash
 git clone https://github.com/uchecharles/ConsensusAudit-Agent
-cd ConsensusAudit-AgentV3
+cd ConsensusAudit-Agent
 npm install
-cp .env.example .env.local
+# create .env.local with the variables below
 npm run dev
-
 ```
 
 ### Environment Variables
@@ -110,13 +109,11 @@ npm run dev
 | `GITHUB_TOKEN` | no | Raises the GitHub API rate limit for large repository scanning. |
 
 ## Reproducing the Demo
-
-1. Open the app, choose **Raw code**. The textarea is pre-filled with `VulnerableVault`, which withdraws before zeroing the balance.
-2. **Run audit.** Expect `REJECTED`, a reentrancy finding, `critical_count: 1`, and a transaction hash. Open it in the Studio explorer to see it FINALIZED.
-3. **Place funds in escrow** by entering a beneficiary address and an amount of GEN. The contract locks the funds via `gl.message.value`.
-4. Press **Release** or **Claim**. The contract rejects it because the verdict is blocked.
-5. **Appeal** with a rebuttal arguing the finding is a false positive. Expect the verdict to hold at `REJECTED`.
-6. Move `balances[msg.sender] = 0;` above the external call and audit again. Expect `APPROVED`. **Release** and **Claim** now succeed and transfer the GEN to the beneficiary.
+1. Choose **Raw code**. The textarea is pre-filled with `VulnerableVault`.
+2. Click **Run audit**. You should see REJECTED with a Critical reentrancy finding and a tx link. Model output can vary.
+3. Look up the submission ID with `get_verdict` in the explorer to confirm the stored verdict.
+4. Submit an appeal with a rebuttal. A second record is created with `is_appeal=true` and `previous_id` set.
+Escrow (open/release/claim/refund) is implemented in the contract and gated on APPROVED. All transactions are currently signed by one server key, so depositor and beneficiary roles can't be demoed separately from the UI.
 
 ## Layout
 
